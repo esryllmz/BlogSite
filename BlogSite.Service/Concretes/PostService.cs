@@ -4,11 +4,7 @@ using BlogSite.Models.Dtos.Posts.Requests;
 using BlogSite.Models.Dtos.Posts.Responses;
 using BlogSite.Models.Entites;
 using BlogSite.Service.Abtracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Core.Entities.Responses;
 
 namespace BlogSite.Service.Concretes;
 
@@ -17,33 +13,59 @@ public class PostService : IPostService
     private readonly IPostRepository _postRepository;
     private readonly IMapper _mapper;
 
-    public PostService (IPostRepository postRepository,IMapper mapper)
+    public PostService(IPostRepository postRepository, IMapper mapper)
     {
         _postRepository = postRepository;
         _mapper = mapper;
     }
 
-    public Post Add(CreatePostRequest create)
+    public ReturnModel<PostResponseDto> Add(CreatePostRequest create)
     {
-        Post post= _mapper.Map<Post>(create);
-        Post createdPost= _postRepository.Add(post);
-        return createdPost;
+        Post createdPost = _mapper.Map<Post>(create);
+        createdPost.Id = Guid.NewGuid();
+
+        _postRepository.Add(createdPost);
+
+        PostResponseDto response = _mapper.Map<PostResponseDto>(createdPost);
+
+        return new ReturnModel<PostResponseDto>
+        {
+            Data = response,
+            Message = "Post Eklendi.",
+            StatusCode = 200,
+            Success = true
+        };
+    }
+
+    public ReturnModel<List<PostResponseDto>> GetAll()
+    {
+        List<Post> posts = _postRepository.GetAll();
+        List<PostResponseDto> responses = _mapper.Map<List<PostResponseDto>>(posts);
+
+
+        return new ReturnModel<List<PostResponseDto>>
+        {
+            Data = responses,
+            Message = string.Empty,
+            StatusCode = 200,
+            Success = true
+        };
 
     }
 
-    public List<PostResponseDto> GetById(Guid id)
+    public ReturnModel<PostResponseDto?> GetById(Guid id)
     {
+        var post = _postRepository.GetById(id);
 
+        var response = _mapper.Map<PostResponseDto>(post);
+
+        return new ReturnModel<PostResponseDto?>
+        {
+            Data = response,
+            Message = string.Empty,
+            StatusCode = 200,
+            Success = true
+        };
 
     }
-
-    public Post Add(CreatePostRequest create)
-    {
-
-
-    }
-
-
-
-
 }
