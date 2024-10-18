@@ -6,10 +6,16 @@ using System.Threading.Tasks;
 
 namespace BlogSite.Models.Dtos.Posts.Responses;
 
-public sealed record PostResponseDto(
-    Guid Id,
-    string Title,
-    string Content,
-    DateTime CreatedDate
-    );
+public sealed record PostResponseDto
+{
+    public Guid Id { get; set; }
+    public string Title { get; set; }
+    public string Content { get; set; }
+    public DateTime CreatedDate { get; set; }
+
+
+}
+    
+
+  
 
