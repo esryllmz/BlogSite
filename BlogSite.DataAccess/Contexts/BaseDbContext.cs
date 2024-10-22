@@ -1,4 +1,6 @@
 ﻿using BlogSite.Models.Entites;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
@@ -10,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace BlogSite.DataAccess.Contexts;
 
-public class BaseDbContext: DbContext
+public class BaseDbContext: IdentityDbContext<User,IdentityRole,string>
 {
     public BaseDbContext(DbContextOptions opt):base(opt)
     {
@@ -21,8 +23,6 @@ public class BaseDbContext: DbContext
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
     }
-
-    public DbSet<User> Users { get; set; }
 
     public DbSet<Post> Posts{ get; set; }
 

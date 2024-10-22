@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -53,4 +54,26 @@ public class EfRepositoryBase<TContext, TEntity, TId> : IRepository<TEntity, TId
         Context.SaveChanges();
         return entity;
     }
+
+    public List<TEntity> GetAll(Expression<Func<TEntity, bool>>? filter = null, bool enableAutoInclude = true)
+    {
+        IQueryable<TEntity> query = Context.Set<TEntity>();
+
+        if (filter is not null)
+        {
+            query = query.Where(filter);
+
+        }
+
+        if (enableAutoInclude is false)
+        {
+            query = query.IgnoreAutoIncludes();
+
+        }
+
+
+        return query.ToList();
+    }
+
+   
 }
