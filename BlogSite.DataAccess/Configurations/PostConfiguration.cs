@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BlogSite.DataAccess.Configurations;
-
 public class PostConfiguration : IEntityTypeConfiguration<Post>
 {
     public void Configure(EntityTypeBuilder<Post> builder)
@@ -22,31 +21,28 @@ public class PostConfiguration : IEntityTypeConfiguration<Post>
         builder.Property(x => x.AuthorId).HasColumnName("Author_Id");
         builder.Property(x => x.CategoryId).HasColumnName("Category_Id");
 
-        builder.HasOne(x=>x.Author)
+
+        builder.HasOne(x => x.Author)
             .WithMany(x => x.Posts)
             .HasForeignKey(x => x.AuthorId)
             .OnDelete(DeleteBehavior.NoAction);
 
-        builder.HasOne(x=>x.Category)
+        builder.HasOne(x => x.Category)
             .WithMany(x => x.Posts)
             .HasForeignKey(x => x.CategoryId)
             .OnDelete(DeleteBehavior.NoAction);
 
-        builder.HasMany(x=>x.Comments)
-            .WithOne(x=>x.Post)
-            .HasForeignKey(x=>x.PostId)
+
+
+        builder.HasMany(x => x.Comments)
+            .WithOne(x => x.Post)
+            .HasForeignKey(x => x.PostId)
             .OnDelete(DeleteBehavior.NoAction);
 
-        builder.Navigation(x => x.Author)
-            .AutoInclude();
 
-        builder.Navigation(x => x.Category)
-            .AutoInclude();
-
-        builder.Navigation(x => x.Comments)
-            .AutoInclude();
-
-
+        builder.Navigation(x => x.Author).AutoInclude();
+        builder.Navigation(x => x.Category).AutoInclude();
+        builder.Navigation(x => x.Comments).AutoInclude();
 
     }
 }

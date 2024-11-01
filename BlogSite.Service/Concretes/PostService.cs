@@ -9,7 +9,7 @@ using Core.Entities.Responses;
 
 namespace BlogSite.Service.Concretes;
 
-public class PostService : IPostService
+public sealed class PostService : IPostService
 {
     private readonly IPostRepository _postRepository;
     private readonly IMapper _mapper;
@@ -38,11 +38,6 @@ public class PostService : IPostService
         };
     }
 
-    public ReturnModel<PostResponseDto?> Delete(Guid id)
-    {
-        
-    }
-
     public ReturnModel<List<PostResponseDto>> GetAll()
     {
         List<Post> posts = _postRepository.GetAll();
@@ -59,7 +54,7 @@ public class PostService : IPostService
 
     }
 
-    public ReturnModel<List<PostResponseDto>> GetAllByAuthorId(long id)
+    public ReturnModel<List<PostResponseDto>> GetAllByAuthorId(string id)
     {
         var posts = _postRepository.GetAll(x => x.AuthorId == id, false);
         var responses = _mapper.Map<List<PostResponseDto>>(posts);
@@ -78,7 +73,6 @@ public class PostService : IPostService
         throw new NotImplementedException();
     }
 
-
     public ReturnModel<PostResponseDto?> GetById(Guid id)
     {
         var post = _postRepository.GetById(id);
@@ -95,32 +89,48 @@ public class PostService : IPostService
 
     }
 
-    public ReturnModel<PostResponseDto?> Update(UpdatePostRequest updatedPost)
+    public ReturnModel<PostResponseDto> Remove(Guid id)
     {
-       Post post=_postRepository.GetById(updatedPost.Id);
+        Post post = _postRepository.GetById(id);
+        Post deletedPost = _postRepository.Remove(post);
 
+        PostResponseDto response = _mapper.Map<PostResponseDto>(deletedPost);
+
+        return new ReturnModel<PostResponseDto>
+        {
+            Data = response,
+            Message = "Post Silindi.",
+            StatusCode = 200,
+            Success = true
+        };
+    }
+
+    public ReturnModel<PostResponseDto> Update(UpdatePostRequest updatePost)
+    {
+
+
+        Post post = _postRepository.GetById(updatePost.Id);
 
         Post update = new Post
         {
-            Id = post.Id,
             CategoryId = post.CategoryId,
-            Content = updatedPost.Content,
-            Title = updatedPost.Title,
+            Content = updatePost.Content,
+            Title = updatePost.Title,
             AuthorId = post.AuthorId,
             CreatedDate = post.CreatedDate,
         };
 
-        Post updatedPost=_postRepository.Update(update);
+        Post updatedPost = _postRepository.Update(update);
 
-        PostResponseDto dto=_mapper.Map<PostResponseDto>(post);
-
-        return new ReturnModel<PostResponseDto?>
+        PostResponseDto dto = _mapper.Map<PostResponseDto>(updatedPost);
+        return new ReturnModel<PostResponseDto>
         {
             Data = dto,
             Message = "Post güncellendi",
             StatusCode = 200,
             Success = true
         };
+
 
     }
 }

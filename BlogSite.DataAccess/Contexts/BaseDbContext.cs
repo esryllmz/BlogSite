@@ -12,23 +12,22 @@ using System.Threading.Tasks;
 
 namespace BlogSite.DataAccess.Contexts;
 
-public class BaseDbContext: IdentityDbContext<User,IdentityRole,string>
+public class BaseDbContext : IdentityDbContext<User, IdentityRole, string>
 {
-    public BaseDbContext(DbContextOptions opt):base(opt)
+    public BaseDbContext(DbContextOptions opt) : base(opt)
     {
-        
+
     }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-
     }
-
-    public DbSet<Post> Posts{ get; set; }
 
     public DbSet<Comment> Comments { get; set; }
 
     public DbSet<Category> Categories { get; set; }
 
-
+    public DbSet<Post> Posts { get; set; }
 }

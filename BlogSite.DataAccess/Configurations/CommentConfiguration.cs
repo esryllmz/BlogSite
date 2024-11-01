@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace BlogSite.DataAccess.Configurations;
 
+
 public class CommentConfiguration : IEntityTypeConfiguration<Comment>
 {
     public void Configure(EntityTypeBuilder<Comment> builder)
@@ -21,16 +22,15 @@ public class CommentConfiguration : IEntityTypeConfiguration<Comment>
         builder.Property(x => x.PostId).HasColumnName("Post_Id");
         builder.Property(x => x.UserId).HasColumnName("User_Id");
 
-        builder.HasOne(x=>x.User)
-            .WithMany(x=> x.Comments)
-            .HasForeignKey(x=>x.UserId)
+
+        builder.HasOne(x => x.User)
+            .WithMany(x => x.Comments)
+            .HasForeignKey(x => x.UserId)
             .OnDelete(DeleteBehavior.NoAction);
 
-        builder.HasOne(x=>x.Post)
-            .WithMany(x=> x.Comments)
-            .HasForeignKey(x=>x.PostId)   
+        builder.HasOne(x => x.Post)
+            .WithMany(x => x.Comments)
+            .HasForeignKey(x => x.PostId)
             .OnDelete(DeleteBehavior.NoAction);
     }
-
-
 }

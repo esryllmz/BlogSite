@@ -3,15 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogSite.Models", "BlogSite.Models\BlogSite.Models.csproj", "{AF09B909-E8D1-48DE-A8EE-8B5F01B2CE80}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogSite.Models", "BlogSite.Models\BlogSite.Models.csproj", "{AF09B909-E8D1-48DE-A8EE-8B5F01B2CE80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogSite.DataAccess", "BlogSite.DataAccess\BlogSite.DataAccess.csproj", "{6C6A573F-D9B4-4793-A468-28832E1D2932}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogSite.DataAccess", "BlogSite.DataAccess\BlogSite.DataAccess.csproj", "{6C6A573F-D9B4-4793-A468-28832E1D2932}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogSite.Service", "BlogSite.Service\BlogSite.Service.csproj", "{AFAF440E-97EE-499F-8FD9-E048654FCFCD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogSite.Service", "BlogSite.Service\BlogSite.Service.csproj", "{AFAF440E-97EE-499F-8FD9-E048654FCFCD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogSite.API", "BlogSite.API\BlogSite.API.csproj", "{378BF1AD-8BA3-46A1-8473-7D6EC41C3F7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogSite.API", "BlogSite.API\BlogSite.API.csproj", "{378BF1AD-8BA3-46A1-8473-7D6EC41C3F7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{553FF5CC-7D4C-404B-A525-A509C7BB381C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{553FF5CC-7D4C-404B-A525-A509C7BB381C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{65FE37FF-C761-4337-9931-B0B0732225FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.Tests", "Service.Tests\Service.Tests.csproj", "{87EFCA30-B2D2-465A-A844-CB13AEA95D45}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,9 +43,16 @@ Global
 		{553FF5CC-7D4C-404B-A525-A509C7BB381C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{553FF5CC-7D4C-404B-A525-A509C7BB381C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{553FF5CC-7D4C-404B-A525-A509C7BB381C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87EFCA30-B2D2-465A-A844-CB13AEA95D45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87EFCA30-B2D2-465A-A844-CB13AEA95D45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87EFCA30-B2D2-465A-A844-CB13AEA95D45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87EFCA30-B2D2-465A-A844-CB13AEA95D45}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{87EFCA30-B2D2-465A-A844-CB13AEA95D45} = {65FE37FF-C761-4337-9931-B0B0732225FF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2932677F-A273-42E4-9DEC-24DBF158A471}

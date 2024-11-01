@@ -15,11 +15,13 @@ public interface IPostService
     ReturnModel<List<PostResponseDto>> GetAll();
     ReturnModel<PostResponseDto?> GetById(Guid id);
     ReturnModel<PostResponseDto> Add(CreatePostRequest create);
-    ReturnModel<PostResponseDto?> Update(UpdatePostRequest update);
-    ReturnModel<PostResponseDto?> Delete(Guid id);
+
+    ReturnModel<PostResponseDto> Update(UpdatePostRequest updatePost);
+
+    ReturnModel<PostResponseDto> Remove(Guid id);
+
     ReturnModel<List<PostResponseDto>> GetAllByCategoryId(int id);
 
-    ReturnModel<List<PostResponseDto>> GetAllByAuthorId(long id);
-
+    ReturnModel<List<PostResponseDto>> GetAllByAuthorId(string id);
 
 }
